@@ -29,7 +29,7 @@ def runtests(directory)
                 if (needToBuild) {
                     withCredentials([usernamePassword(credentialsId: params.credentialsId, passwordVariable: 'ClientSecret', usernameVariable: 'ClientId')]) {
                         sh 'mkdir -p Settings'
-                        sh 'echo "{\\"ClientId\\": \\"$ClientId\\",\\"ClientSecret\\": \\"$ClientSecret\\", \\"BaseUrl\\": \\"$apiUrl\\", \\"Debug\\" : \\"$debugMode\\" }}" > Settings/servercreds.json'
+                        sh 'echo "{\\"ClientId\\": \\"$ClientId\\",\\"ClientSecret\\": \\"$ClientSecret\\", \\"BaseUrl\\": \\"$apiUrl\\", \\"Debug\\" : \\"$debugMode\\" }" > Settings/servercreds.json'
                     }
                 }
             }
