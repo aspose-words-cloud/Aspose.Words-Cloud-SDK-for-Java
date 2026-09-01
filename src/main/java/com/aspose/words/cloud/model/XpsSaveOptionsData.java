@@ -48,8 +48,60 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @ApiModel(description = "Container class for xps save options.")
 public class XpsSaveOptionsData extends FixedPageSaveOptionsData {
+    /**
+     * Gets or sets a compression level used to save document.
+     * The default value is Normal.
+     */
+    @JsonAdapter(CompressionLevelEnum.Adapter.class)
+    public enum CompressionLevelEnum {
+        NORMAL("Normal"),
+        MAXIMUM("Maximum"),
+        FAST("Fast"),
+        SUPERFAST("SuperFast");
+
+        private String value;
+
+        CompressionLevelEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static CompressionLevelEnum fromValue(String text) {
+            for (CompressionLevelEnum b : CompressionLevelEnum.values()) {
+                if (String.valueOf(b.value).equals(text)) {
+                    return b;
+                }
+            }
+            return null;
+        }
+
+        public static class Adapter extends TypeAdapter< CompressionLevelEnum > {
+            @Override
+            public void write(final JsonWriter jsonWriter, final CompressionLevelEnum enumeration) throws IOException {
+                jsonWriter.value(enumeration.getValue());
+            }
+
+            @Override
+            public CompressionLevelEnum read(final JsonReader jsonReader) throws IOException {
+                String value = jsonReader.nextString();
+                return CompressionLevelEnum.fromValue(String.valueOf(value));
+            }
+        }
+    }
+
     @SerializedName("BookmarksOutlineLevel")
     protected Integer bookmarksOutlineLevel;
+
+    @SerializedName("CompressionLevel")
+    protected CompressionLevelEnum compressionLevel;
 
     @SerializedName("DigitalSignatureDetails")
     protected DigitalSignatureDetails digitalSignatureDetails;
@@ -78,6 +130,26 @@ public class XpsSaveOptionsData extends FixedPageSaveOptionsData {
 
     public void setBookmarksOutlineLevel(Integer bookmarksOutlineLevel) {
         this.bookmarksOutlineLevel = bookmarksOutlineLevel;
+    }
+
+
+    /**
+     * Gets or sets a compression level used to save document.
+     * The default value is Normal.
+    * @return compressionLevel
+    **/
+    @ApiModelProperty(value = "Gets or sets a compression level used to save document. The default value is Normal.")
+    public CompressionLevelEnum getCompressionLevel() {
+        return compressionLevel;
+    }
+
+    public XpsSaveOptionsData compressionLevel(CompressionLevelEnum compressionLevel) {
+        this.compressionLevel = compressionLevel;
+        return this;
+    }
+
+    public void setCompressionLevel(CompressionLevelEnum compressionLevel) {
+        this.compressionLevel = compressionLevel;
     }
 
 
@@ -160,6 +232,7 @@ public class XpsSaveOptionsData extends FixedPageSaveOptionsData {
     public XpsSaveOptionsData() {
         super();
         this.bookmarksOutlineLevel = null;
+        this.compressionLevel = null;
         this.digitalSignatureDetails = null;
         this.headingsOutlineLevels = null;
         this.outlineOptions = null;
@@ -212,6 +285,7 @@ public class XpsSaveOptionsData extends FixedPageSaveOptionsData {
         XpsSaveOptionsData xpsSaveOptionsData = (XpsSaveOptionsData) o;
         return
             Objects.equals(this.bookmarksOutlineLevel, xpsSaveOptionsData.bookmarksOutlineLevel) &&
+            Objects.equals(this.compressionLevel, xpsSaveOptionsData.compressionLevel) &&
             Objects.equals(this.digitalSignatureDetails, xpsSaveOptionsData.digitalSignatureDetails) &&
             Objects.equals(this.headingsOutlineLevels, xpsSaveOptionsData.headingsOutlineLevels) &&
             Objects.equals(this.outlineOptions, xpsSaveOptionsData.outlineOptions) &&
@@ -221,7 +295,7 @@ public class XpsSaveOptionsData extends FixedPageSaveOptionsData {
 
   @Override
   public int hashCode() {
-    return Objects.hash(bookmarksOutlineLevel, digitalSignatureDetails, headingsOutlineLevels, outlineOptions, useBookFoldPrintingSettings, super.hashCode());
+    return Objects.hash(bookmarksOutlineLevel, compressionLevel, digitalSignatureDetails, headingsOutlineLevels, outlineOptions, useBookFoldPrintingSettings, super.hashCode());
   }
 
   @Override
@@ -249,6 +323,7 @@ public class XpsSaveOptionsData extends FixedPageSaveOptionsData {
     sb.append("    pageCount: ").append(toIndentedString(getPageCount())).append("\n");
     sb.append("    pageIndex: ").append(toIndentedString(getPageIndex())).append("\n");
     sb.append("    bookmarksOutlineLevel: ").append(toIndentedString(getBookmarksOutlineLevel())).append("\n");
+    sb.append("    compressionLevel: ").append(toIndentedString(getCompressionLevel())).append("\n");
     sb.append("    digitalSignatureDetails: ").append(toIndentedString(getDigitalSignatureDetails())).append("\n");
     sb.append("    headingsOutlineLevels: ").append(toIndentedString(getHeadingsOutlineLevels())).append("\n");
     sb.append("    outlineOptions: ").append(toIndentedString(getOutlineOptions())).append("\n");
