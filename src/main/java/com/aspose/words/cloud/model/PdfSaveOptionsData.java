@@ -533,6 +533,9 @@ public class PdfSaveOptionsData extends FixedPageSaveOptionsData {
     @SerializedName("FontEmbeddingMode")
     protected FontEmbeddingModeEnum fontEmbeddingMode;
 
+    @SerializedName("GenerateFormFieldScripts")
+    protected Boolean generateFormFieldScripts;
+
     @SerializedName("HeaderFooterBookmarksExportMode")
     protected HeaderFooterBookmarksExportModeEnum headerFooterBookmarksExportMode;
 
@@ -867,6 +870,31 @@ public class PdfSaveOptionsData extends FixedPageSaveOptionsData {
 
     public void setFontEmbeddingMode(FontEmbeddingModeEnum fontEmbeddingMode) {
         this.fontEmbeddingMode = fontEmbeddingMode;
+    }
+
+
+    /**
+     * Gets or sets a value determining  whether to generate scripts that emulate specific Microsoft Word form field behavior in PDF.
+     * Default is false.
+     * When this option is enabled, the exporter generates PDF JavaScript actions to emulate Microsoft Word
+     * form field behavior, such as date and time form fields with formatting and validation rules.When set to true, supported behavior will be exported as PDF JavaScript actions.
+     * When set to false, no form field scripts will be generated.Script execution depends on the PDF viewer. Some PDF viewers might ignore scripts, restrict script execution,
+     * or require the user to enable JavaScript.JavaScript actions are prohibited by PDF/A-1, PDF/A-2 and PDF/A-3 compliance.
+     * The false value will be used automatically in this case.
+    * @return generateFormFieldScripts
+    **/
+    @ApiModelProperty(value = "Gets or sets a value determining  whether to generate scripts that emulate specific Microsoft Word form field behavior in PDF. Default is false. When this option is enabled, the exporter generates PDF JavaScript actions to emulate Microsoft Word form field behavior, such as date and time form fields with formatting and validation rules.When set to true, supported behavior will be exported as PDF JavaScript actions. When set to false, no form field scripts will be generated.Script execution depends on the PDF viewer. Some PDF viewers might ignore scripts, restrict script execution, or require the user to enable JavaScript.JavaScript actions are prohibited by PDF/A-1, PDF/A-2 and PDF/A-3 compliance. The false value will be used automatically in this case.")
+    public Boolean getGenerateFormFieldScripts() {
+        return generateFormFieldScripts;
+    }
+
+    public PdfSaveOptionsData generateFormFieldScripts(Boolean generateFormFieldScripts) {
+        this.generateFormFieldScripts = generateFormFieldScripts;
+        return this;
+    }
+
+    public void setGenerateFormFieldScripts(Boolean generateFormFieldScripts) {
+        this.generateFormFieldScripts = generateFormFieldScripts;
     }
 
 
@@ -1221,6 +1249,7 @@ public class PdfSaveOptionsData extends FixedPageSaveOptionsData {
         this.exportDocumentStructure = null;
         this.exportLanguageToSpanTag = null;
         this.fontEmbeddingMode = null;
+        this.generateFormFieldScripts = null;
         this.headerFooterBookmarksExportMode = null;
         this.imageColorSpaceExportMode = null;
         this.imageCompression = null;
@@ -1288,6 +1317,7 @@ public class PdfSaveOptionsData extends FixedPageSaveOptionsData {
 
 
 
+
         if (this.outlineOptions != null) {
             this.outlineOptions.validate();
         }
@@ -1331,6 +1361,7 @@ public class PdfSaveOptionsData extends FixedPageSaveOptionsData {
             Objects.equals(this.exportDocumentStructure, pdfSaveOptionsData.exportDocumentStructure) &&
             Objects.equals(this.exportLanguageToSpanTag, pdfSaveOptionsData.exportLanguageToSpanTag) &&
             Objects.equals(this.fontEmbeddingMode, pdfSaveOptionsData.fontEmbeddingMode) &&
+            Objects.equals(this.generateFormFieldScripts, pdfSaveOptionsData.generateFormFieldScripts) &&
             Objects.equals(this.headerFooterBookmarksExportMode, pdfSaveOptionsData.headerFooterBookmarksExportMode) &&
             Objects.equals(this.imageColorSpaceExportMode, pdfSaveOptionsData.imageColorSpaceExportMode) &&
             Objects.equals(this.imageCompression, pdfSaveOptionsData.imageCompression) &&
@@ -1353,7 +1384,7 @@ public class PdfSaveOptionsData extends FixedPageSaveOptionsData {
 
   @Override
   public int hashCode() {
-    return Objects.hash(attachmentsEmbeddingMode, cacheBackgroundGraphics, compliance, createNoteHyperlinks, customPropertiesExport, digitalSignatureDetails, displayDocTitle, downsampleOptions, embedAttachments, embedFullFonts, encryptionDetails, exportDocumentStructure, exportLanguageToSpanTag, fontEmbeddingMode, headerFooterBookmarksExportMode, imageColorSpaceExportMode, imageCompression, interpolateImages, openHyperlinksInNewWindow, outlineOptions, pageMode, preblendImages, preserveFormFields, renderChoiceFormFieldBorder, textCompression, useBookFoldPrintingSettings, useCoreFonts, useSdtTagAsFormFieldName, zoomBehavior, zoomFactor, exportFloatingShapesAsInlineTag, super.hashCode());
+    return Objects.hash(attachmentsEmbeddingMode, cacheBackgroundGraphics, compliance, createNoteHyperlinks, customPropertiesExport, digitalSignatureDetails, displayDocTitle, downsampleOptions, embedAttachments, embedFullFonts, encryptionDetails, exportDocumentStructure, exportLanguageToSpanTag, fontEmbeddingMode, generateFormFieldScripts, headerFooterBookmarksExportMode, imageColorSpaceExportMode, imageCompression, interpolateImages, openHyperlinksInNewWindow, outlineOptions, pageMode, preblendImages, preserveFormFields, renderChoiceFormFieldBorder, textCompression, useBookFoldPrintingSettings, useCoreFonts, useSdtTagAsFormFieldName, zoomBehavior, zoomFactor, exportFloatingShapesAsInlineTag, super.hashCode());
   }
 
   @Override
@@ -1394,6 +1425,7 @@ public class PdfSaveOptionsData extends FixedPageSaveOptionsData {
     sb.append("    exportDocumentStructure: ").append(toIndentedString(getExportDocumentStructure())).append("\n");
     sb.append("    exportLanguageToSpanTag: ").append(toIndentedString(getExportLanguageToSpanTag())).append("\n");
     sb.append("    fontEmbeddingMode: ").append(toIndentedString(getFontEmbeddingMode())).append("\n");
+    sb.append("    generateFormFieldScripts: ").append(toIndentedString(getGenerateFormFieldScripts())).append("\n");
     sb.append("    headerFooterBookmarksExportMode: ").append(toIndentedString(getHeaderFooterBookmarksExportMode())).append("\n");
     sb.append("    imageColorSpaceExportMode: ").append(toIndentedString(getImageColorSpaceExportMode())).append("\n");
     sb.append("    imageCompression: ").append(toIndentedString(getImageCompression())).append("\n");
