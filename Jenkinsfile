@@ -29,13 +29,23 @@ def runtests(directory)
                 if (needToBuild) {
                     withCredentials([usernamePassword(credentialsId: params.credentialsId, passwordVariable: 'ClientSecret', usernameVariable: 'ClientId')]) {
                         sh 'mkdir -p Settings'
-                        sh 'echo "{\\"ClientId\\": \\"$ClientId\\",\\"ClientSecret\\": \\"$ClientSecret\\", \\"BaseUrl\\": \\"$apiUrl\\", \\"Debug\\" : \\"$debugMode\\" }}" > Settings/servercreds.json'
+                        sh 'echo "{\\"ClientId\\": \\"$ClientId\\",\\"ClientSecret\\": \\"$ClientSecret\\", \\"BaseUrl\\": \\"$apiUrl\\", \\"Debug\\" : \\"$debugMode\\" }" > Settings/servercreds.json'
                     }
                 }
             }
             
             if (needToBuild) {
                 docker.image('maven').inside{
+                    withEnv([
+                    /* Override the local repository to avoid: Could not create local
+                     * repository at /.m2/repository
+                     */
+                    'MAVEN_OPTS=-Dmaven.repo.local=.m2/repository',
+                    /* set home to our current directory because HOME resolves to "/" for a
+                     * uid that is absent from the image's /etc/passwd
+                     */
+                    'HOME=.',
+                    ]) {
                     stage('build'){
                         sh "mvn compile"
                     }
@@ -54,6 +64,7 @@ def runtests(directory)
                     
                     stage('clean-compiled'){
                         sh "rm -rf %s"
+                    }
                     }
                 }  
             }            
