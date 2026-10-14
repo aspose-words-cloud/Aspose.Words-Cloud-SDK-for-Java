@@ -6,7 +6,7 @@ parameters {
 		string(name: 'releaseCredentialsId', defaultValue: 'f0c4f9b6-8ffe-4ea8-8981-e99263fdb788', description: 'release credentials id')
 		string(name: 'serverToDeploy', defaultValue: '-DuseStageRepo=true', description: 'possible values are -DuseStageRepo=true or false')
 }
-node('words-linux') {         
+node('sdk-linux') {         
     try {
 		stage('0:Merge master to release'){
 			if (params.StartFromStep.toInteger() < 1) {

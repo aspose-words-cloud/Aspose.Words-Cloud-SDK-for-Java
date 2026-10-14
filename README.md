@@ -13,6 +13,11 @@ This repository contains Aspose.Words Cloud SDK for Java source code. This SDK a
 * Watermarks and protection
 * Full read & write access to Document Object Model, including sections, paragraphs, text, images, tables, headers/footers and many others
 
+## Enhancements in Version 26.10
+
+- Added 'AdvancedOptions' property for CompareData class.
+
+
 ## Enhancements in Version 26.9
 
 - Added 'CompressionLevel' property for XpsSaveOptionsData class.
@@ -452,7 +457,7 @@ Add this dependency to your project's POM:
     <dependency>
         <groupId>com.aspose</groupId>
         <artifactId>aspose-words-cloud</artifactId>
-        <version>26.9.0</version>
+        <version>26.10.0</version>
     </dependency>
 </dependencies>
 ```

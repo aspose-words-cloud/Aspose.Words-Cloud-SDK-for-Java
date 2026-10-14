@@ -75,7 +75,7 @@ def runtests(directory)
     }
 }
 
-node('words-linux') {
+node('sdk-linux') {
 	cleanWs()
 	runtests("java-sdk")
 }

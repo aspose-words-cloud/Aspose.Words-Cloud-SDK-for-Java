@@ -48,6 +48,9 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @ApiModel(description = "Container class for compare documents.")
 public class CompareData implements ModelIfc {
+    @SerializedName("AdvancedOptions")
+    protected AdvancedCompareOptions advancedOptions;
+
     @SerializedName("Author")
     protected String author;
 
@@ -65,6 +68,25 @@ public class CompareData implements ModelIfc {
 
     @SerializedName("ResultDocumentFormat")
     protected String resultDocumentFormat;
+    /**
+     * Gets or sets advanced compare options that might help to produce more precise comparison output.
+    * @return advancedOptions
+    **/
+    @ApiModelProperty(value = "Gets or sets advanced compare options that might help to produce more precise comparison output.")
+    public AdvancedCompareOptions getAdvancedOptions() {
+        return advancedOptions;
+    }
+
+    public CompareData advancedOptions(AdvancedCompareOptions advancedOptions) {
+        this.advancedOptions = advancedOptions;
+        return this;
+    }
+
+    public void setAdvancedOptions(AdvancedCompareOptions advancedOptions) {
+        this.advancedOptions = advancedOptions;
+    }
+
+
     /**
      * Gets or sets the initials of the author to use for revisions.
     * @return author
@@ -183,6 +205,7 @@ public class CompareData implements ModelIfc {
 
 
     public CompareData() {
+        this.advancedOptions = null;
         this.author = null;
         this.compareOptions = null;
         this.comparingWithDocument = null;
@@ -219,6 +242,13 @@ public class CompareData implements ModelIfc {
             throw new ApiException(400, "Property FileReference in CompareData is required.");
         }
 
+        if (this.advancedOptions != null) {
+            this.advancedOptions.validate();
+        }
+
+
+
+
         if (this.compareOptions != null) {
             this.compareOptions.validate();
         }
@@ -245,6 +275,7 @@ public class CompareData implements ModelIfc {
 
         CompareData compareData = (CompareData) o;
         return
+            Objects.equals(this.advancedOptions, compareData.advancedOptions) &&
             Objects.equals(this.author, compareData.author) &&
             Objects.equals(this.compareOptions, compareData.compareOptions) &&
             Objects.equals(this.comparingWithDocument, compareData.comparingWithDocument) &&
@@ -255,13 +286,14 @@ public class CompareData implements ModelIfc {
 
   @Override
   public int hashCode() {
-    return Objects.hash(author, compareOptions, comparingWithDocument, dateTime, fileReference, resultDocumentFormat);
+    return Objects.hash(advancedOptions, author, compareOptions, comparingWithDocument, dateTime, fileReference, resultDocumentFormat);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class CompareData {\n");
+    sb.append("    advancedOptions: ").append(toIndentedString(getAdvancedOptions())).append("\n");
     sb.append("    author: ").append(toIndentedString(getAuthor())).append("\n");
     sb.append("    compareOptions: ").append(toIndentedString(getCompareOptions())).append("\n");
     sb.append("    comparingWithDocument: ").append(toIndentedString(getComparingWithDocument())).append("\n");
