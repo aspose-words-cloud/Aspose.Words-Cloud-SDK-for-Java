@@ -56,7 +56,8 @@ public class PdfDigitalSignatureDetailsData implements ModelIfc {
         SHA256("Sha256"),
         SHA384("Sha384"),
         SHA512("Sha512"),
-        RIPEMD160("RipeMD160");
+        RIPEMD160("RipeMD160"),
+        AUTO("Auto");
 
         private String value;
 
