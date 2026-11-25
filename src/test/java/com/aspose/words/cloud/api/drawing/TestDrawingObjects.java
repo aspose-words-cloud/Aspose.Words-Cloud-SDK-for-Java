@@ -578,6 +578,90 @@ public class TestDrawingObjects  extends TestCase
     }
 
     /*
+     * Test for adding drawing object with the image from the storage.
+     */
+    @Test
+    public void testInsertDrawingObjectByReference() throws ApiException, MessagingException, IOException
+    {
+        String remoteFileName = "TestInsertDrawingObjectByReference.docx";
+        String remoteImagePath = remoteDataFolder + "/TestInsertDrawingObjectByReference.png";
+
+        TestInitializer.UploadFile(
+            PathUtil.get(TestInitializer.LocalTestFolder, localFile),
+            remoteDataFolder + "/" + remoteFileName
+        );
+        TestInitializer.UploadFile(
+            PathUtil.get(TestInitializer.LocalTestFolder, "Common/aspose-cloud.png"),
+            remoteImagePath
+        );
+
+        FileReference requestDrawingObjectImageReference = new FileReference(remoteImagePath);
+        DrawingObjectInsertData requestDrawingObject = new DrawingObjectInsertData();
+        requestDrawingObject.setHeight((double)0);
+        requestDrawingObject.setLeft((double)0);
+        requestDrawingObject.setTop((double)0);
+        requestDrawingObject.setWidth((double)0);
+        requestDrawingObject.setRelativeHorizontalPosition(DrawingObjectInsertData.RelativeHorizontalPositionEnum.MARGIN);
+        requestDrawingObject.setRelativeVerticalPosition(DrawingObjectInsertData.RelativeVerticalPositionEnum.MARGIN);
+        requestDrawingObject.setWrapType(DrawingObjectInsertData.WrapTypeEnum.INLINE);
+        requestDrawingObject.setImageReference(requestDrawingObjectImageReference);
+
+        InsertDrawingObjectByReferenceRequest request = new InsertDrawingObjectByReferenceRequest(
+            remoteFileName,
+            requestDrawingObject,
+            "",
+            remoteDataFolder,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        );
+
+        DrawingObjectResponse result = TestInitializer.wordsApi.insertDrawingObjectByReference(request);
+        assertNotNull(result);
+    }
+
+    /*
+     * Test for adding drawing object online with the image from the request.
+     */
+    @Test
+    public void testInsertDrawingObjectByReferenceOnline() throws ApiException, MessagingException, IOException
+    {
+        byte[] requestDocument = Files.readAllBytes(Paths.get(TestInitializer.LocalTestFolder, localFile).toAbsolutePath());
+        byte[] requestDrawingObjectImageReferenceStream = Files.readAllBytes(Paths.get(TestInitializer.LocalTestFolder, "Common/aspose-cloud.png").toAbsolutePath());
+        FileReference requestDrawingObjectImageReference = new FileReference(requestDrawingObjectImageReferenceStream);
+        DrawingObjectInsertData requestDrawingObject = new DrawingObjectInsertData();
+        requestDrawingObject.setHeight((double)0);
+        requestDrawingObject.setLeft((double)0);
+        requestDrawingObject.setTop((double)0);
+        requestDrawingObject.setWidth((double)0);
+        requestDrawingObject.setRelativeHorizontalPosition(DrawingObjectInsertData.RelativeHorizontalPositionEnum.MARGIN);
+        requestDrawingObject.setRelativeVerticalPosition(DrawingObjectInsertData.RelativeVerticalPositionEnum.MARGIN);
+        requestDrawingObject.setWrapType(DrawingObjectInsertData.WrapTypeEnum.INLINE);
+        requestDrawingObject.setImageReference(requestDrawingObjectImageReference);
+
+        InsertDrawingObjectByReferenceOnlineRequest request = new InsertDrawingObjectByReferenceOnlineRequest(
+            requestDocument,
+            requestDrawingObject,
+            "",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        );
+
+        InsertDrawingObjectByReferenceOnlineResponse result = TestInitializer.wordsApi.insertDrawingObjectByReferenceOnline(request);
+        assertNotNull(result);
+    }
+
+    /*
      * Test for deleting drawing object.
      */
     @Test
