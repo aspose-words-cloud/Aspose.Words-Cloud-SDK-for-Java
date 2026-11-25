@@ -358,6 +358,7 @@ public class InsertDrawingObjectOnlineRequest implements RequestIfc {
         }
 
         if (getDrawingObject() != null) {
+            getDrawingObject().getFilesContent(localFilesContentParams);
             localVarFormParams.put("DrawingObject", getDrawingObject());
         }
 

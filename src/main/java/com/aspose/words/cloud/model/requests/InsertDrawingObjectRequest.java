@@ -403,6 +403,7 @@ public class InsertDrawingObjectRequest implements RequestIfc {
         List<FileReference> localFilesContentParams = new ArrayList<FileReference>();
         Map<String, Object> localVarFormParams = new LinkedHashMap<String, Object>();
         if (getDrawingObject() != null) {
+            getDrawingObject().getFilesContent(localFilesContentParams);
             localVarFormParams.put("DrawingObject", getDrawingObject());
         }
 

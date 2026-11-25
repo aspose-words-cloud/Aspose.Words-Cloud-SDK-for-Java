@@ -473,6 +473,7 @@ public class JSON {
                 put("DrawingObject, _", com.aspose.words.cloud.model.DrawingObject.class);
                 put("DrawingObjectCollection, _", com.aspose.words.cloud.model.DrawingObjectCollection.class);
                 put("DrawingObjectInsert, _", com.aspose.words.cloud.model.DrawingObjectInsert.class);
+                put("DrawingObjectInsertData, _", com.aspose.words.cloud.model.DrawingObjectInsertData.class);
                 put("DrawingObjectLink, _", com.aspose.words.cloud.model.DrawingObjectLink.class);
                 put("DrawingObjectResponse, _", com.aspose.words.cloud.model.DrawingObjectResponse.class);
                 put("DrawingObjectsResponse, _", com.aspose.words.cloud.model.DrawingObjectsResponse.class);

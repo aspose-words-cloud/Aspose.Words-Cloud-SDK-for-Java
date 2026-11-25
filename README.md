@@ -13,6 +13,11 @@ This repository contains Aspose.Words Cloud SDK for Java source code. This SDK a
 * Watermarks and protection
 * Full read & write access to Document Object Model, including sections, paragraphs, text, images, tables, headers/footers and many others
 
+## Enhancements in Version 26.12
+
+- Added 'InsertDrawingObjectByReference' method to insert a drawing object with the image passed as 'FileReference': a storage path in the document folder or its subfolders, a public HTTP(S) URL, or a request part.
+
+
 ## Enhancements in Version 26.10
 
 - Added 'AdvancedOptions' property for CompareData class.
